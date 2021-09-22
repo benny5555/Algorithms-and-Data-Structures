@@ -31,7 +31,7 @@
 
 ~~~C++
 	void it_merge_sort(int l, int r, vector<int>& arr) {
-		int n = r - l + 1;
+		int n = r - l;
 		vector<int> temp(n);
 		--r;
 		for (int size = 1; size < n; size <<= 1) {
