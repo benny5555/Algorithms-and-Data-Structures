@@ -2,13 +2,13 @@
 
 Assumptions:
 
-* No valid inputs: characters except for the numbers characters
+* Valid inputs: there are only number characters from '0' to '9'
 * No negative numbers
 * Simple Implementation
 
 
 
-Basic it is just simple simulating human actions.
+Basically, it is just simple simulating human actions.
 
 
 
