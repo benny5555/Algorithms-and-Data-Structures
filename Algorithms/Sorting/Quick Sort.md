@@ -2,7 +2,7 @@
 
 ~~~C++
 	void quick_sort(int l, int r, vector<int>& arr) {
-		return __quick_sort(l, r - 1, arr);
+		__quick_sort(l, r - 1, arr);
 	}
 	void __quick_sort(int l, int r, vector<int>& arr) {
 		if (l >= r) return;
@@ -28,7 +28,7 @@ This is the simplest implementation of quick sort. However, the efficiency is no
 ~~~C++
 	void op_quick_sort(int l, int r, vector<int>& arr) {
 		srand(time(0));
-		return __op_quick_sort(l, r - 1, arr);
+		__op_quick_sort(l, r - 1, arr);
 	}
 	void __op_quick_sort(int l, int r, vector<int>& arr) {
 		if (l >= r) return;
