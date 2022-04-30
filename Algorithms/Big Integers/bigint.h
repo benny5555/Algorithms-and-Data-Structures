@@ -551,8 +551,8 @@ bigint &bigint::operator%=(const char *num) {
 }
 
 // // increment and decrement
-bigint &bigint::operator++() { *this += bigint("1"); }
-bigint &bigint::operator--() { *this -= bigint("1"); }
+bigint &bigint::operator++() { return *this += bigint("1"); }
+bigint &bigint::operator--() { return *this -= bigint("1"); }
 bigint bigint::operator++(int) {
   bigint temp = *this;
   *this += 1;
