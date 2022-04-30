@@ -238,7 +238,7 @@ bigint::bigint(const std::string &num) {
 bigint::bigint(std::string &&num) {
   if (is_valid_digit(num)) {
     value = std::exchange(num, "");
-    if (num[0] == '-') {
+    if (value[0] == '-') {
       sign = value[0];
       value = value.substr(1);
     } else {
