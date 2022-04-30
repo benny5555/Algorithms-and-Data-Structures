@@ -404,9 +404,11 @@ bigint bigint::operator/(const bigint &num) const {
   if (bigint_abs(*this) < bigint_abs(num)) return bigint();
   bigint ans, div;
   div.value.pop_back();
-  const bigint &a = *this, &b = num;
+  bigint a(*this), b = (num);
+  a.sign = b.sign = '+';
   ans.value = std::string(a.value.size(), '0');
   for (int i = 0; a.value[i]; ++i) {
+    if (div.value == "0") div.value.pop_back();
     div.value.push_back(a.value[i]);
     if (div == b) {
       ans.value[i] = '1';
@@ -414,14 +416,14 @@ bigint bigint::operator/(const bigint &num) const {
       continue;
     }
     int temp = 0;
-    while (div > b) {
+    while (div >= b) {
       div -= b;
       ++temp;
     }
     ans.value[i] = temp + '0';
   }
   strip_leading_zeroes(ans.value);
-  if (sign != b.sign) {
+  if (sign != num.sign) {
     ans.sign = '-';
   }
   return ans;
@@ -436,8 +438,10 @@ bigint bigint::operator%(const bigint &num) const {
   }
   bigint div;
   div.value.pop_back();
-  const bigint &a = *this, &b = num;
+  bigint a(*this), b(num);
+  a.sign = b.sign = '+';
   for (int i = 0; a.value[i]; ++i) {
+    if (div.value == "0") div.value.pop_back();
     div.value.push_back(a.value[i]);
     if (b > div) {
       continue;

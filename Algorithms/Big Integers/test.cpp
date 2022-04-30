@@ -3,8 +3,10 @@
 #include "bigint.h"
 using namespace std;
 int main() {
-  bigint a = "-20", b = "6";
-  long long c = 100;
-  cout << a % c << endl;
+  bigint n = 1;
+  for (int i = 1; i <= 20; ++i) {
+    n *= i;
+  }
+  n = 20;
   return 0;
 }
