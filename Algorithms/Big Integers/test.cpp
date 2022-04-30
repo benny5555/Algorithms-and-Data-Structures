@@ -3,8 +3,7 @@
 #include "bigint.h"
 using namespace std;
 int main() {
-  bigint n = 123;
-  n *= n;
+  bigint n = 0;
   cout << n << endl;
   return 0;
 }

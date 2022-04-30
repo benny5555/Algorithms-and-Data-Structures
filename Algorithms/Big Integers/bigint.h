@@ -22,7 +22,7 @@ class bigint {
   bigint(const long long &);
   bigint(const std::string &);
   bigint(std::string &&);
-  bigint(const char *);
+  explicit bigint(const char *);
   ~bigint();
 
   // operators
