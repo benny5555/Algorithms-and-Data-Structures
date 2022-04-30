@@ -554,13 +554,13 @@ bigint &bigint::operator%=(const char *num) {
 bigint &bigint::operator++() { *this += bigint("1"); }
 bigint &bigint::operator--() { *this -= bigint("1"); }
 bigint bigint::operator++(int) {
-  bigint temp = *this + 1;
-  *this = temp;
+  bigint temp = *this;
+  *this += 1;
   return temp;
 }
 bigint bigint::operator--(int) {
-  bigint temp = *this - 1;
-  *this = temp;
+  bigint temp = *this;
+  *this -= 1;
   return temp;
 }
 

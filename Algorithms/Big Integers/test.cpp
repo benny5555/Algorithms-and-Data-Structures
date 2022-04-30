@@ -7,7 +7,9 @@ int main() {
   for (int i = 1; i <= 20; ++i) {
     n *= i;
   }
-  n = 101;
-  cout << n % 50 << endl;
+  n = 1;
+  for (int i = 0; i < 10; ++i) {
+    cout << n++ << endl;
+  }
   return 0;
 }
