@@ -553,8 +553,16 @@ bigint &bigint::operator%=(const char *num) {
 // // increment and decrement
 bigint &bigint::operator++() { *this += bigint("1"); }
 bigint &bigint::operator--() { *this -= bigint("1"); }
-bigint bigint::operator++(int) { return *this + 1; }
-bigint bigint::operator--(int) { return *this - 1; }
+bigint bigint::operator++(int) {
+  bigint temp = *this + 1;
+  *this = temp;
+  return temp;
+}
+bigint bigint::operator--(int) {
+  bigint temp = *this - 1;
+  *this = temp;
+  return temp;
+}
 
 // // comparison
 bool bigint::operator<(const bigint &num) const { return compare(num) < 0; }
