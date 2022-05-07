@@ -1,5 +1,9 @@
 #ifndef __BIGINT_H_
 #define __BIGINT_H_
+#include <openssl/rand.h>
+#include <stdlib.h>
+#include <time.h>
+
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -120,9 +124,11 @@ class bigint {
 
  public:
   bool is_valid_digit(const std::string &);
-  static bigint rand_generate();
+  static bigint bigint_rand_generate(const bigint &, const bigint &);
   static bigint bigint_abs(const bigint &);
   void set_sign(char);
+  bigint pow(int);
+  static bigint bigint_pow(bigint, int);
 };
 int bigint::compare(const bigint &b) const {
   const bigint &num = *this;
@@ -649,7 +655,25 @@ bool bigint::is_valid_digit(const std::string &num) {
   }
   return true;
 }
-bigint bigint::rand_generate() { return bigint(); }
+bigint bigint_rand_generate(const bigint &lower, const bigint &higher) {
+  if (higher < lower) return bigint();
+  int size = 0;
+  bigint larger(1);
+  while (larger < higher) {
+    larger *= 256;
+    ++size;
+  }
+  unsigned char *buff = (unsigned char *)malloc(size * sizeof(unsigned char));
+  RAND_bytes(buff, sizeof(buff));
+  bigint ans;
+  for (int i = 0; i < size; ++i) {
+    ans = ans * 256 + (int)buff[i];
+  }
+  ans %= (higher - lower);
+  ans += lower;
+  free(buff);
+  return ans;
+}
 bigint bigint::bigint_abs(const bigint &a) {
   bigint ans(a);
   ans.set_sign('+');
@@ -662,4 +686,39 @@ void bigint::set_sign(char c) {
   }
   this->sign = c;
 }
-#endif
+bigint bigint::pow(int p) {
+  bigint ans(1), temp = *this;
+  if (p > 0) {
+    while (p) {
+      if (p & 1) ans *= temp;
+      temp *= temp;
+      p /= 2;
+    }
+  } else {
+    while (p) {
+      if (p & 1) ans /= temp;
+      temp *= temp;
+      p /= 2;
+    }
+  }
+  return ans;
+}
+
+bigint bigint_pow(bigint temp, int p) {
+  bigint ans(1);
+  if (p > 0) {
+    while (p) {
+      if (p & 1) ans *= temp;
+      temp *= temp;
+      p /= 2;
+    }
+  } else {
+    while (p) {
+      if (p & 1) ans /= temp;
+      temp *= temp;
+      p /= 2;
+    }
+  }
+  return ans;
+}
+#endif  //__BIGINT_H_
